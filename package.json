@@ -1,0 +1,14 @@
+{
+  "name": "namaste-new",
+  "version": "1.0.0",
+  "description": "this is same as namaste",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "parcel": "^2.9.3"
+  }
+}
