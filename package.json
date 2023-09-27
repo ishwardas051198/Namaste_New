@@ -4,7 +4,8 @@
   "description": "this is same as namaste",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "start":"parcel index.html"
   },
   "author": "",
   "license": "ISC",
