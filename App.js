@@ -1,4 +1,4 @@
-import React from "react";
+import React,{lazy,Suspense} from "react";
 import ReactDOM from "react-dom/client";
 
 import Header from "./src/components/Header";
@@ -10,6 +10,7 @@ import About from "./src/components/About";
 import Error from "./src/components/Error";
 import Contact from "./src/components/Contact";
 import ResturantMenu from "./src/components/RestaurantMenu";
+//import Grocery from "./src/components/Grocery";
 // let ele=React.createElement("h1",{},"hello from Namaste New");
 
 // let jsxHeading = <h1 className="heading">Hello from JSX</h1>;
@@ -46,8 +47,11 @@ import ResturantMenu from "./src/components/RestaurantMenu";
 //   );
 // };
 // parent.render(jsxHeading);
-
-
+//lazy loading
+const Grocery=lazy(()=>
+  import("./src/components/Grocery")
+)
+//console.log(Grocery)
 const AppLayout=()=>{
   return (<div className="app">
     <Header />
@@ -91,6 +95,10 @@ const router=createBrowserRouter([
       {
         path:"/resturant-menu/:resId",
         element:<ResturantMenu />
+      },
+      {
+        path:"/grocery",
+        element:<Suspense fallback={<h1>Your component is loading..</h1>}><Grocery /></Suspense>
       }
     ],
     errorElement:<Error />

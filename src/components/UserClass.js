@@ -4,20 +4,35 @@ class UserClass extends React.Component {
         super(props)
         //console.log("Constructor called")
         this.state={
-            count:0
+            userInfo:{
+              name:"dummy",
+              location:"dummy"
+            }
         }
     }
     componentDidMount(){
-      this.timer=setInterval(()=>{
-        //console.log("set interval is there")
+      // this.timer=setInterval(()=>{
+      //   //console.log("set interval is there")
 
-      },1000)
+      // },1000)
+      const fetchData=async ()=>{
+        const data=await fetch("https://api.github.com/users/ishwardas051198")
+        const json=await data.json();
+        this.setState(this.state.userInfo={
+          name:json.name,
+          location:json.location,
+          avatar_url:json.avatar_url
+  
+        })
+       }
+       fetchData();
       
       //console.log("cdm Called")
     }
     componentDidUpdate(){
     
      // console.log("component did update called")
+  
     }
 
     componentWillUnmount(){
@@ -27,16 +42,17 @@ class UserClass extends React.Component {
   render() {
     const {count}=this.state;
     //console.log("render called")
+    const {name,location,avatar_url}=this.state.userInfo
     return (
       <div className="userClass">
-        <h1>Count={count}</h1>
-        <h1>Name:{this.props.name}</h1>
-        <h2>Location:{this.props.location}</h2>
-        <button onClick={()=>{
+        <img src={avatar_url} />
+        <h1>Name:{name}</h1>
+        <h2>Location:{location}</h2>
+        {/* <button onClick={()=>{
             this.setState({
                 count:this.state.count+1
             })
-        }}>Increse Count</button>
+        }}>Increse Count</button> */}
       </div>
     );
   }
