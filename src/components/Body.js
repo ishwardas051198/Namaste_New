@@ -1,14 +1,22 @@
-import ReasturantCard from "./ReasturantCard";
+import ReasturantCard,{LableComponent} from "./ReasturantCard";
 import resList from "./utils/mockData";
-import { useState, useEffect } from "react";
+import { useState, useEffect ,useContext } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "./utils/useOnlineStatus";
+import UserContext from "./utils/UserContext";
+
+
 const Body = () => {
+  const data=useContext(UserContext)
+  const InputChange=(event)=>{
+    data.setUserName(event.target.value)
+  }
   const onlineStatus = useOnlineStatus();
   const [res, setRes] = useState([]);
   const [resCopy, setResCopy] = useState([]);
   const [searchText, setSearchText] = useState("");
+  const PromotedComponenet=LableComponent(ReasturantCard);
   let constantRes = {};
   useEffect(() => {
     fetchData();
@@ -23,6 +31,7 @@ const Body = () => {
     setResCopy(
       json.data.cards[2].card.card.gridElements.infoWithStyle.restaurants
     );
+    console.log(json.data.cards[2].card.card.gridElements.infoWithStyle.restaurants);
   };
   console.log("body rendered");
   if (onlineStatus == false)
@@ -60,8 +69,8 @@ const Body = () => {
             Search
           </button>
         </div>
-        <div className="m4 p-4">
-        <button
+        {/* <div className="m4 p-4"> */}
+        {/* <button
           onClick={() => {
             let newRes = res.filter((data) => {
              // console.log("button clicked")
@@ -72,8 +81,12 @@ const Body = () => {
           }}
           className="Top-Button px-4 py-2 bg-gray-100 m-4 rounded-lg"
         >
-          Top Rated
-        </button>
+          Top Rated */}
+        {/* </button> */}
+        {/* </div> */}
+        <div className="m-4 p-5">
+          <label>User Name:</label>
+          <input className=" border border-black" onChange={InputChange}/>
         </div>
 
         
@@ -86,7 +99,8 @@ const Body = () => {
               key={data.info.id}
               style={{ textDecoration: "none" }}
             >
-              <ReasturantCard resObj={data} />
+              {data.info.name=="Andhra Gunpowder"?<PromotedComponenet resObj={data} />:<ReasturantCard resObj={data} />}
+              
             </Link>
           );
         })}

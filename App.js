@@ -1,4 +1,4 @@
-import React,{lazy,Suspense} from "react";
+import React,{lazy,Suspense, useState} from "react";
 import ReactDOM from "react-dom/client";
 
 import Header from "./src/components/Header";
@@ -10,6 +10,7 @@ import About from "./src/components/About";
 import Error from "./src/components/Error";
 import Contact from "./src/components/Contact";
 import ResturantMenu from "./src/components/RestaurantMenu";
+import UserContext from "./src/components/utils/UserContext";
 //import Grocery from "./src/components/Grocery";
 // let ele=React.createElement("h1",{},"hello from Namaste New");
 
@@ -51,13 +52,21 @@ import ResturantMenu from "./src/components/RestaurantMenu";
 const Grocery=lazy(()=>
   import("./src/components/Grocery")
 )
+
 //console.log(Grocery)
 const AppLayout=()=>{
-  return (<div className="app">
+  const [userName,setUserName]=useState("Ishan Sambhwani")
+  return (
+    <UserContext.Provider value={{loggedinUser:userName,setUserName}}>
+  <div className="app">
+    
+
+    
     <Header />
     {/* <Body/> */}
   <Outlet />
   </div>
+  </UserContext.Provider>
   )
 }
 // const router=createBrowserRouter([
@@ -87,6 +96,7 @@ const router=createBrowserRouter([
       {
         path:"/about",
         element:<About />
+        // <UserContext.Provider value={{loggedinUser:"Naman Agarwal"}}><About /></UserContext.Provider>
       },
       {
         path:"/contact",
