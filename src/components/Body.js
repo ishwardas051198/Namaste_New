@@ -31,9 +31,9 @@ const Body = () => {
     setResCopy(
       json.data.cards[2].card.card.gridElements.infoWithStyle.restaurants
     );
-    console.log(json.data.cards[2].card.card.gridElements.infoWithStyle.restaurants);
+    //console.log("json data is",json);
   };
-  console.log("body rendered");
+  //console.log("body rendered");
   if (onlineStatus == false)
     return (
       <h1>
@@ -48,6 +48,7 @@ const Body = () => {
       <div className="filter flex">
         <div className="m4 p-4">
           <input
+           data-testid="searchInput"
             className="border border-solid border-black"
             type="text"
             value={searchText}
@@ -58,7 +59,7 @@ const Body = () => {
           <button className="px-4 py-2 bg-green-100 m-4 rounded-lg"
             onClick={() => {
               let newRes = res.filter((data) => {
-                console.log(data.info.name);
+                //console.log(data.info.name);
                 return data.info.name
                   .toLowerCase()
                   .includes(searchText.toLowerCase());
@@ -91,7 +92,7 @@ const Body = () => {
 
         
       </div>
-      <div className="res-container flex flex-wrap  ">
+      <div className="res-container flex flex-wrap  " >
         {resCopy.map((data) => {
           return (
             <Link

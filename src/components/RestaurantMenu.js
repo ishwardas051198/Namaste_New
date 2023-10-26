@@ -7,7 +7,7 @@ import { useState } from "react";
 const ResturantMenu = () => {
   //   const params=useParams();
   const { resId } = useParams();
- const [showIndex,setShowIndex]=useState(0);
+ const [showIndex,setShowIndex]=useState(null);
   const resInfo = useRestroData(resId);
 
   const catagories =

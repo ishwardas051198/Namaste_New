@@ -1,5 +1,5 @@
 const Contact=()=>{
-    return <div>
+    return <div className="div">
         <h1>You are inside contact</h1>
     </div>
 }
